@@ -16,7 +16,7 @@ return new class extends Migration
         }
 
         Schema::create('job_statuses', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->string('name')->unique();
         });
     }

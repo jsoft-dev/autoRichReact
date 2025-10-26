@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        if(Schema::hasTable('employees')) {
+            return;
+        }
+        Schema::create('employees', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('full_name');
-            $table->string('contact_number')->unique();
+            $table->string('position');
+            $table->string('contact_number', 10)->unique();
+            $table->string('address')->nullable();
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('employees');
     }
 };
